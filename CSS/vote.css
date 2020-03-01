@@ -1,0 +1,19 @@
+#images{
+    display: inline-block;
+    margin-left: 300px;
+    margin-top: 150px;
+}
+h1{
+    text-align: center;
+    font-family: monospace;
+}
+
+#images img{
+   
+    border: 20px black;
+    width: 200px;
+    height: 300px;
+    border: groove 20px;
+    padding: 30px;
+    
+}
