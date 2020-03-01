@@ -35,15 +35,15 @@ function products(name){
 }
 for(var i=0;i<assets.length;i++){
     new products(assets[i]);
-    console.log('hi');
+    
 }
 
-render();
+
 function randomFun(min,max){
     var result = Math.floor(Math.random()*(max-min+1)-min);
     return result;
 }
-
+//render();
 function render(){
 
     var leftProduct = arrObj[randomFun(0,arrObj.length-1)];
@@ -65,6 +65,20 @@ function render(){
     center.setAttribute('src',centerProduct.imgPath);
     center.setAttribute('alt',centerProduct.name);
     center.setAttribute('title',centerProduct.name);
+   // console.log('hi');
+  
+    for (var l = 0; l < assets.length; l++){
+        
+        if (left.alt === arrObj[l].name){
+            arrObj[l].viewed=arrObj[l].viewed+1;
+            console.log(arrObj[l].name);
+            //console.log(assets[i].viewed);
+        }
+        if (center.alt === arrObj[l].name){
+            arrObj[l].viewed=arrObj[l].viewed+1;        }
+        if (right.alt === arrObj[l].name){
+            arrObj[l].viewed=arrObj[l].viewed+1;        }
+    }
     
 
 }render();
@@ -76,14 +90,14 @@ var totalClick=0;
 function handle(event){
      
     
-     console.log(totalClick);
+     //console.log(totalClick);
     if(totalClick <= 25 ){
         
         for(var i=0;i<arrObj.length;i++){
           if(event.target.alt === arrObj[i].name ){
             arrObj[i].clicked++;
             //console.log(arrObj[i].clicked)
-            arrObj[i].viewed++;
+            //arrObj[i].viewed++;
         }
     
     }
@@ -95,11 +109,14 @@ function handle(event){
     }
     else{
         render2();
-        console.log(render2);
-        // removeEventListener('click',handle);
-        left.remove();
-        right.remove();
-        center.remove();
+        //console.log(render2);
+        for(var i=0;i<click.length;i++){
+            click[i].removeEventListener('click',handle);
+        }
+        
+        // left.remove();
+        // right.remove();
+        // center.remove();
         }
         
        
