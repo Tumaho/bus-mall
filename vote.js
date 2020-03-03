@@ -1,28 +1,33 @@
 'use strict'
 var assets=[
-    'bag',
-    'banana',
-    'bathroom',
-    'boots',
-    'breakfast',
-    'bubblegum',
-    'chair',
-    'cthulhu',
-    'dog-duck',
-    'dragon',
-    'pen',
-    'pet-sweep',
-    'scissors',
-    'shark',
-    'sweep',
-    'tauntaun',
-    'unicorn',
-    'usb',
-    'water-can',
-    'wine-glass'
-]
+
+    'bag.jpg',
+    'banana.jpg',
+    'bathroom.jpg',
+    'boots.jpg',
+    'breakfast.jpg',
+    'bubblegum.jpg',
+    'chair.jpg',
+    'cthulhu.jpg',
+    'dog-duck.jpg',
+    'dragon.jpg',
+    'pen.jpg',
+    'pet-sweep.jpg',
+    'scissors.jpg',
+    'shark.jpg',
+    'sweep.png',
+    'tauntaun.jpg',
+    'unicorn.jpg',
+    'usb.gif',
+    'water-can.jpg',
+    'wine-glass.jpg'
+];
+
+    
+
 var newArray=[];
 var viewArr = [ ];
+
 
  var left =document.getElementById('leftImage');
  
@@ -33,9 +38,10 @@ var viewArr = [ ];
 function products(name){
     this.clicked=0;
     this.viewed=0;
-    this.name = name;
-    this.imgPath= `assets/${name}.jpg`
-    
+
+    this.name = name.split(',')[0];
+    this.imgPath= `assets/${name}`;
+
     arrObj.push(this);
     
 }
