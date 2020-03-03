@@ -35,12 +35,31 @@ function products(name){
     this.viewed=0;
     this.name = name;
     this.imgPath= `assets/${name}.jpg`
+    
     arrObj.push(this);
+    
 }
 for(var i=0;i<assets.length;i++){
     new products(assets[i]);
     
 }
+function setItem1(){
+    var productsItems = JSON.stringify(arrObj);
+    localStorage.setItem( 'products', productsItems);
+    console.log(productsItems);
+  }
+  
+  console.log('out',arrObj);
+  function getItem1(){
+    var productsItems = localStorage.getItem('products');
+    console.log(arrObj)
+    
+    if(productsItems){
+    arrObj = JSON.parse(productsItems);
+    render();
+    render2();}
+  }
+  
 
 
 
@@ -58,7 +77,7 @@ function render(){
     var leftProduct = arrObj[randomFun(0,arrObj.length-1)];
     var centerProduct = arrObj[randomFun(0,arrObj.length-1)];
     var rightProduct = arrObj[randomFun(0,arrObj.length-1)];
-    while(newArray.includes(leftProduct.name) || newArray.includes(centerProduct.name) || newArray.includes(rightProduct.name) || leftProduct.imgPath === centerProduct.imgPath || centerProduct.imgPath === rightProduct.imgPath || leftProduct.imgPath === rightProduct.imgPath){
+    while(newArray.includes(leftProduct) || newArray.includes(centerProduct) || newArray.includes(rightProduct) || leftProduct.imgPath === centerProduct.imgPath || centerProduct.imgPath === rightProduct.imgPath || leftProduct.imgPath === rightProduct.imgPath){
         console.log('repeated');
         var leftProduct = arrObj[randomFun(0,arrObj.length-1)];
         var centerProduct = arrObj[randomFun(0,arrObj.length-1)];
@@ -74,9 +93,9 @@ function render(){
     newArray=[];
     
     
-    newArray.push(leftProduct.name);
-    newArray.push(centerProduct.name);
-    newArray.push(rightProduct.name);
+    newArray.push(leftProduct);
+    newArray.push(centerProduct);
+    newArray.push(rightProduct);
 
     left.setAttribute('src',leftProduct.imgPath);
     left.setAttribute('alt',leftProduct.name);
@@ -117,12 +136,15 @@ function render(){
     
 
 }render();
+
+//getItem();
 var click = document.getElementsByClassName('imgs');
 for(var i=0;i<click.length;i++){
     click[i].addEventListener('click',handle);
 }
 var totalClick=0;
 function handle(event){
+    event.preventDefault();
      
     
     if(totalClick <= 25 ){
@@ -145,6 +167,7 @@ function handle(event){
     }
     else{
         render2();
+        
         for(var i=0;i<click.length;i++){
             click[i].removeEventListener('click',handle);
         }
@@ -153,7 +176,8 @@ function handle(event){
         }
         
        
-
+        setItem1();
+       
 }
 
  var voteArr = [ ];
@@ -162,18 +186,18 @@ function handle(event){
  
 
 function render2(){
-    // var information = document.getElementById('info');
+    var information = document.getElementById('info');
     
-    // var list = document.createElement('ul');
-    // //console.log(list);
-    // information.appendChild(list);
-    // for (var i=0;i<assets.length;i++){
-    //     var listItem = document.createElement('li');
-    //     list.appendChild(listItem);
+    var list = document.createElement('ul');
+    //console.log(list);
+    information.appendChild(list);
+    for (var i=0;i<assets.length;i++){
+        var listItem = document.createElement('li');
+        list.appendChild(listItem);
         
-    //     listItem.textContent=`${arrObj[i].name} had ${arrObj[i].clicked} votes and was shown ${arrObj[i].viewed} times  `;
+        listItem.textContent=`${arrObj[i].name} had ${arrObj[i].clicked} votes and was shown ${arrObj[i].viewed} times  `;
 
-    // }
+    }
 var ctx = document.getElementById('myChart').getContext('2d');
 var myChart = new Chart(ctx, {
     type: 'bar',
@@ -226,3 +250,4 @@ var myChart = new Chart(ctx, {
 }
 
 
+getItem1();
