@@ -39,7 +39,7 @@ function products(name){
     this.clicked=0;
     this.viewed=0;
 
-    this.name = name.split(',')[0];
+    this.name = name.split('.')[0];
     this.imgPath= `assets/${name}`;
 
     arrObj.push(this);
